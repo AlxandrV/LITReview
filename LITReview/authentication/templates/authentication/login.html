@@ -1,0 +1,10 @@
+{% extends 'review/base.html' %}
+{% block authentication %}
+<p>{{ message }}</p>
+<p>Pas encore membre ? <a href="">Inscrivez-vous maintenant !</a></p>
+<form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit"> Se connecter</button>
+</form>
+{% endblock %}
