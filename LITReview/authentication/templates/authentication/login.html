@@ -1,10 +1,20 @@
 {% extends 'review/base.html' %}
 {% block authentication %}
-<p>{{ message }}</p>
-<p>Pas encore membre ? <a href="">Inscrivez-vous maintenant !</a></p>
-<form method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <button type="submit"> Se connecter</button>
-</form>
+
+<div class="d-flex jcont-center">
+    <div class="bloc">
+        <div>
+            <p>Inscrivez-vous maintenant</p>
+            <a href="">S'inscrire</a>
+        </div>
+    </div>
+    <div class="bloc">
+        <p>{{ message }}message erreur</p>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
