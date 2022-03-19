@@ -10,7 +10,7 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-        <p>Connecté en tant que {{ request.user }}</p>
+        {% block content %}{% endblock %}
     {% else %}
         {% block authentication %}{% endblock %}
     {% endif %}
