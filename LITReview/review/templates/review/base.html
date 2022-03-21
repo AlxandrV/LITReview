@@ -10,6 +10,14 @@
 </head>
 <body>
     {% if user.is_authenticated %}
+        <header>
+            <h2>LITReview</h2>
+            <nav>
+                <a href="{% url 'home' %}">Flux</a>
+                <a href="{% url 'posts' %}">Posts</a>
+                <a href="{% url 'logout' %}">Se déconnecter</a>
+            </nav>
+        </header>
         {% block content %}{% endblock %}
     {% else %}
         {% block authentication %}{% endblock %}

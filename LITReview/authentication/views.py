@@ -13,3 +13,7 @@ def signup_page(request):
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'authentication/signup.html', context={'form': form})
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')

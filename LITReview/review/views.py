@@ -5,3 +5,7 @@ from django.shortcuts import render
 def home(request):
     return render(request,
                   'review/home.html')
+    
+def posts_user(request):
+    return render(request,
+                  'review/posts.html')

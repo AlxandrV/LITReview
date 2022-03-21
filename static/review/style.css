@@ -22,8 +22,7 @@
   align-items: center;
   justify-content: center;
   color: white; }
-  .bloc > form > * {
-    width: max-content;
-    margin: auto; }
+  .bloc form label, .bloc form span {
+    display: block; }
 
 /*# sourceMappingURL=style.css.map */

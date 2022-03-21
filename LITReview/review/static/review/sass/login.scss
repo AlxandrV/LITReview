@@ -11,8 +11,7 @@
     justify-content: center;
     color: $color_primary;
 
-    > form > *{
-        width: max-content;
-        margin: auto;
+    form label, form span{
+        display: block;
     }
 }

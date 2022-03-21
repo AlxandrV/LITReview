@@ -26,5 +26,7 @@ urlpatterns = [
             redirect_authenticated_user=True),
          name='login'),
     path('signup/', authentication.views.signup_page, name='signup'),
-    path('home/',review.views.home, name='home' )
+    path('logout/', authentication.views.logout_user, name='logout'),
+    path('home/', review.views.home, name='home' ),
+    path('posts/', review.views.posts_user, name='posts'),
 ]

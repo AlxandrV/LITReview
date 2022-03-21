@@ -1,12 +1,16 @@
 {% extends 'review/base.html' %}
 {% block authentication %}
+<div class="bloc">
     <h2>Inscription</h2>
+    <a href="{% url 'home' %}">Retour</a>
     {% if form.errors %}
         {{ form.errors }}
     {% endif %}
     <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
+        
         <button type="submit">S’inscrire</button>
     </form>
+</div>
 {% endblock %}
