@@ -1,4 +1,10 @@
 {% extends 'review/base.html' %}
 {% block content %}
-<p>Créer ticket</p>
+<h2>Créer un ticket</h2>
+<a href="{% url 'posts' %}">Retour aux posts</a>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Créer">
+</form>
 {% endblock %}
