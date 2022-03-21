@@ -29,4 +29,5 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('home/', review.views.home, name='home' ),
     path('posts/', review.views.posts_user, name='posts'),
+    path('create-ticket/', review.views.create_ticket, name="create-ticket"),
 ]
