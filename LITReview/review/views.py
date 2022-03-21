@@ -17,9 +17,11 @@ def posts_user(request):
 @login_required
 def create_ticket(request):
     if request.method == 'POST':
-        form = TicketForm(request.POST)
+        form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
-            ticket = form.save()
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
             return redirect('home')
     else:
         form = TicketForm()
