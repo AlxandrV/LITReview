@@ -3,5 +3,11 @@
 <ul>
     <li><a href="{% url 'create-ticket' %}">Créer un ticket</a></li>
 </ul>
-<p>Flux des post (temporaire)</p>
+{% for ticket in tickets %}
+<div class="bloc">
+    <h3>{{ ticket.title }}</h3>
+    <img src="{{ ticket.image.url }}" alt="">
+    <p>{{ ticket.description }}</p>
+</div>
+{% endfor %}
 {% endblock %}

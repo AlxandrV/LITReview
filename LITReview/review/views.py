@@ -11,8 +11,10 @@ def home(request):
 
 @login_required
 def posts_user(request):
+    tickets = Ticket.objects.filter(user=request.user)
     return render(request,
-                  'review/posts.html')
+                  'review/posts.html',
+                  context={'tickets': tickets})
 
 @login_required
 def create_ticket(request):
