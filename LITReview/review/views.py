@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.generic.detail import DetailView
 
 from review.models import Ticket
 from review.forms import TicketForm
@@ -30,3 +31,13 @@ def create_ticket(request):
     return render(request,
                   'review/create-ticket.html',
                   {'form': form})
+    
+class DetailTicket(DetailView):
+    model = Ticket
+    
+    def get(self, request, id):
+        ticket = self.model.objects.get(id=id)
+        return render(request,
+                  'review/detail-ticket.html',
+                  context={'ticket': ticket})
+    

@@ -1,14 +1,8 @@
 {% extends 'review/base.html' %}
 {% block content %}
-<ul>
-    <li><a href="{% url 'create-ticket' %}">Créer un ticket</a></li>
-</ul>
-{% for ticket in tickets %}
 <div class="bloc">
     <h3>{{ ticket.title }}</h3>
     <img src="{{ ticket.image.url }}" alt="">
     <p>{{ ticket.description }}</p>
-    <a href="{% url 'detail-ticket' ticket.id %}">Voir les critiques</a>
 </div>
-{% endfor %}
 {% endblock %}
