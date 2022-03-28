@@ -4,5 +4,6 @@
     <h3>{{ ticket.title }}</h3>
     <img src="{{ ticket.image.url }}" alt="">
     <p>{{ ticket.description }}</p>
+    <a href="{% url 'response' ticket.id %}">Ajouter une critique</a>
 </div>
 {% endblock %}

@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
+from django.views.generic import View
 
 from review.models import Ticket
-from review.forms import TicketForm
+from review.forms import TicketForm, ReviewForm
 
 @login_required
 def home(request):
@@ -41,3 +43,23 @@ class DetailTicket(DetailView):
                   'review/detail-ticket.html',
                   context={'ticket': ticket})
     
+class ReviewFormView(View):
+    form_class = ReviewForm
+    template_name = 'review/create-review.html'
+    success_url = 'review/detail-ticket.html'
+    
+    def get(self, request, id):
+        form = self.form_class()
+        return render(request, self.template_name, context={'form': form})
+        
+    def post(self, request, id):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            ticket = Ticket.objects.get(id=id)
+            review.ticket = ticket
+            review.save()
+        return render(request,
+                      self.success_url,
+                      context={'ticket': ticket})
