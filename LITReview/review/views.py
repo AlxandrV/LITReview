@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic import View
 
-from review.models import Ticket
+from review.models import Ticket, Review
 from review.forms import TicketForm, ReviewForm
 
 @login_required
@@ -35,13 +35,15 @@ def create_ticket(request):
                   {'form': form})
     
 class DetailTicket(DetailView):
-    model = Ticket
+    ticket_model = Ticket
+    review_model = Review
     
     def get(self, request, id):
-        ticket = self.model.objects.get(id=id)
+        ticket = self.ticket_model.objects.get(id=id)
+        reviews = self.review_model.objects.filter(ticket=ticket).order_by('-time_created')[:10]
         return render(request,
                   'review/detail-ticket.html',
-                  context={'ticket': ticket})
+                  context={'ticket': ticket, 'reviews': reviews})
     
 class ReviewFormView(View):
     form_class = ReviewForm
