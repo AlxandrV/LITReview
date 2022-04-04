@@ -1,0 +1,6 @@
+{% for user in users %}
+<li>
+<p>{{ user.username }}</p>
+<button value="{{ user.id }}">Suivre</button>
+</li>
+{% endfor %}

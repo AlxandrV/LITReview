@@ -1,5 +1,6 @@
 from multiprocessing import context
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -104,4 +105,7 @@ class FollowsList(ListView):
 def search_follows(request):
     if request.method == 'POST':
         value = request.POST.get('search-value')
-        return JsonResponse(value, safe=False)
+        users = User.objects.filter(username__contains=value)
+        return render(request,
+                      'review/users-list.html',
+                      context={'users': users})

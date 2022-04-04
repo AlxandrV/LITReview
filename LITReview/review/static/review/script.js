@@ -1,4 +1,6 @@
 search_bar = document.getElementsByName('search')[0]
+search_input = document.getElementsByName('search-value')[0]
+user_list = document.getElementsByClassName('users-list')[0]
 
 
 // Ajax
@@ -17,19 +19,22 @@ function xhr(option) {
     });
 }
 search_bar.addEventListener('input', () => {
-    
-    let search_func = async() => {
-        data = new FormData(search_bar)
-        // data.append('search', search_bar.value)
-        const option = {
-            'type': 'POST',
-            'header': document.getElementsByName('csrfmiddlewaretoken')[0].value,
-            'url': 'search-follows/',
-            'data': data
-        }
-        let xhrJSON = await xhr(option).then(JSON.parse)
-        console.log(xhrJSON)
-    }
 
-    search_func()
+    if (search_input.value !== "") {
+        let search_func = async() => {
+            data = new FormData(search_bar)
+            // data.append('search', search_bar.value)
+            const option = {
+                'type': 'POST',
+                'header': document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                'url': 'search-follows/',
+                'data': data
+            }
+            let xhr_response = await xhr(option)
+            console.log(xhr_response)
+            user_list.innerHTML = xhr_response
+        }
+    
+        search_func()
+    }
 })
