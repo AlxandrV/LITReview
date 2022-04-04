@@ -1,5 +1,8 @@
 {% extends 'review/base.html' %}
 {% block content %}
 <p>Connecté en tant que {{ request.user }}</p>
-<input type="search" name="searh" id="search">
+<form action="" method="post" name="search">
+    {% csrf_token %}
+    <input type="search" name="search-value">
+</form>
 {% endblock %}

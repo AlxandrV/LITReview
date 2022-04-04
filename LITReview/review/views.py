@@ -1,5 +1,6 @@
 from multiprocessing import context
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
@@ -98,3 +99,9 @@ class FollowsList(ListView):
     
     def get(self, request):
         return render(request, self.template_name)
+
+@login_required
+def search_follows(request):
+    if request.method == 'POST':
+        value = request.POST.get('search-value')
+        return JsonResponse(value, safe=False)
