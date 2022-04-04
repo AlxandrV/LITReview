@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic import View, FormView
+from django.views.generic import View
+from django.views.generic.list import ListView
 
 from review.models import Ticket, Review
 from review.forms import TicketForm, ReviewForm
@@ -91,3 +92,9 @@ def new_review(request):
     return render(request,
                   'review/new-review.html', 
                   context={'rform': rform, 'tform': tform})
+    
+class FollowsList(ListView):
+    template_name = 'review/follows.html'
+    
+    def get(self, request):
+        return render(request, self.template_name)

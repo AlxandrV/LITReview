@@ -34,7 +34,8 @@ urlpatterns = [
     path('posts/create-ticket/', review.views.create_ticket, name='create-ticket'),
     path('posts/<int:id>/', review.views.DetailTicket.as_view(), name='detail-ticket'),
     path('posts/<int:id>/add/', review.views.ReviewFormView.as_view(), name='response'),
-    path('posts/new-review/', review.views.new_review, name='new-review')
+    path('posts/new-review/', review.views.new_review, name='new-review'),
+    path('follows/', review.views.FollowsList.as_view(), name='follows')
 ]
 
 if settings.DEBUG:
