@@ -8,7 +8,7 @@
 </div>
 {% for review in reviews %}
 <div class="bloc">
-    <p>{{ review.rating }}</p>
+    <p>Notes : {{ review.rating }}/5</p>
     <p>{{ review.user }} le {{ review.time_created }}</p>
     <p>{{ review.headline }}</p>
     <p>{{ review.body }}</p>

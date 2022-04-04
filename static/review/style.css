@@ -10,6 +10,9 @@
 .m-auto {
   margin: auto; }
 
+a {
+  background-color: aqua; }
+
 .bloc {
   box-sizing: border-box;
   padding: 15px;

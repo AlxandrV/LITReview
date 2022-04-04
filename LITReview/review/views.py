@@ -1,8 +1,9 @@
+from multiprocessing import context
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic import View
+from django.views.generic import View, FormView
 
 from review.models import Ticket, Review
 from review.forms import TicketForm, ReviewForm
@@ -65,3 +66,28 @@ class ReviewFormView(View):
         return render(request,
                       self.success_url,
                       context={'ticket': ticket})
+
+@login_required
+def new_review(request):
+    if request.method == 'POST':
+        rform = ReviewForm(request.POST, prefix='rform')
+        tform = TicketForm(request.POST, request.FILES, prefix='tform')
+        if rform.is_valid() and tform.is_valid():
+            ticket = tform.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            review = rform.save(commit=False)
+            review.user = request.user
+            last_ticket = Ticket.objects.last()
+            review.ticket = last_ticket
+            review.save()
+            return redirect('detail-ticket', id=last_ticket.id)
+    else:
+        rform = ReviewForm(prefix='rform')
+        tform = TicketForm(prefix='tform')
+
+        # title = request.POST.get("title")
+        # print(title)
+    return render(request,
+                  'review/new-review.html', 
+                  context={'rform': rform, 'tform': tform})

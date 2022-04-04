@@ -1,0 +1,11 @@
+{% extends 'review/base.html' %}
+{% block content %}
+<div class="bloc">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ tform.as_p }}
+        {{ rform.as_p }}
+        <input type="submit" value="Ajouter une critique">
+    </form>
+</div>
+{% endblock %}
