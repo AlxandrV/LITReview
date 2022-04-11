@@ -7,8 +7,9 @@ from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic import View
 from django.views.generic.list import ListView
+from django.db.models import Q
 
-from review.models import Ticket, Review
+from review.models import Ticket, Review, UserFollows
 from review.forms import TicketForm, ReviewForm
 
 @login_required
@@ -105,7 +106,17 @@ class FollowsList(ListView):
 def search_follows(request):
     if request.method == 'POST':
         value = request.POST.get('search-value')
-        users = User.objects.filter(username__contains=value)
+        followeds = UserFollows.objects.filter(user=request.user)
+        users = User.objects.filter(Q(username__contains=value) & ~Q(id__in=[follow.followed_user.id for follow in followeds]))
         return render(request,
                       'review/users-list.html',
                       context={'users': users})
+
+@login_required
+def add_follow(request):
+    if request.method == 'POST':
+        id_user = request.POST.get('id-user')
+        user_follow = User.objects.get(id=id_user)
+        followed = UserFollows.objects.create(user=request.user, followed_user=user_follow)
+        return render(request,
+                      'review/followed-user.html')

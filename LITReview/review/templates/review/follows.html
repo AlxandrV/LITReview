@@ -5,5 +5,7 @@
     {% csrf_token %}
     <input type="search" name="search-value">
 </form>
-<div class="users-list"></div>
+<div class="users-list">
+{% include 'review/followed-user.html' %}
+</div>
 {% endblock %}

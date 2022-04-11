@@ -37,6 +37,7 @@ urlpatterns = [
     path('posts/new-review/', review.views.new_review, name='new-review'),
     path('follows/', review.views.FollowsList.as_view(), name='follows'),
     path('follows/search-follows/', review.views.search_follows, name='search-follows'),
+    path('follows/add-follow/', review.views.add_follow, name='add-follow'),
 ]
 
 if settings.DEBUG:
