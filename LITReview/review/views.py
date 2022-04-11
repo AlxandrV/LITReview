@@ -100,7 +100,10 @@ class FollowsList(ListView):
     template_name = 'review/follows.html'
     
     def get(self, request):
-        return render(request, self.template_name)
+        user_followeds = UserFollows.objects.filter(user=request.user)
+        return render(request,
+                      self.template_name,
+                      context={'users': user_followeds})
 
 @login_required
 def search_follows(request):

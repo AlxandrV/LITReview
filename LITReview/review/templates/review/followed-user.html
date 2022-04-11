@@ -1,1 +1,9 @@
 <p>User ajouté</p>
+<ul>
+    {% for user in users %}
+    <li>
+    <p>{{ user.followed_user.username }}</p>
+    <button value="{{ user.followed_user.id }}">Se désabonner</button>
+    </li>
+    {% endfor %}
+</ul>

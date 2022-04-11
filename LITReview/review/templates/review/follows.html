@@ -1,11 +1,10 @@
 {% extends 'review/base.html' %}
 {% block content %}
-<p>Connecté en tant que {{ request.user }}</p>
 <form action="" method="post" name="search">
     {% csrf_token %}
     <input type="search" name="search-value">
 </form>
 <div class="users-list">
-{% include 'review/followed-user.html' %}
 </div>
+{% include 'review/followed-user.html' %}
 {% endblock %}
