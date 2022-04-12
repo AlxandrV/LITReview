@@ -4,18 +4,27 @@
     <li><a href="{% url 'create-ticket' %}">Créer un ticket</a></li>
     <li><a href="{% url 'new-review' %}">Nouvelle critique</a></li>
 </ul>
-{% for ticket in tickets %}
-<div class="bloc">
-    <div class="interactions">
-        <a href="{% url 'edit-ticket' ticket.id %}">Éditer</a>
-        <a href="{% url 'delete-ticket' ticket.id %}">Supprimer</a>
+{% for element in records %}
+    {% if element.title %}
+    <div class="bloc">
+        <div class="interactions">
+            <a href="{% url 'edit-ticket' element.id %}">Éditer</a>
+            <a href="{% url 'delete-ticket' element.id %}">Supprimer</a>
+        </div>
+        <div class="detail-element">
+            <h3>{{ element.title }}</h3>
+            <img src="{{ element.image.url }}" alt="">
+            <p>{{ element.description }}</p>
+            <a href="{% url 'detail-ticket' element.id %}">Voir les critiques</a>
+        </div>
     </div>
-    <div class="detail-ticket">
-        <h3>{{ ticket.title }}</h3>
-        <img src="{{ ticket.image.url }}" alt="">
-        <p>{{ ticket.description }}</p>
-        <a href="{% url 'detail-ticket' ticket.id %}">Voir les critiques</a>
+    {% else %}
+    <div class="bloc">
+        <p>Notes : {{ element.rating }}/5</p>
+        <p>{{ element.user }} le {{ element.time_created }}</p>
+        <p>{{ element.headline }}</p>
+        <p>{{ element.body }}</p>
     </div>
-</div>
+    {% endif %}
 {% endfor %}
 {% endblock %}

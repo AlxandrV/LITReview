@@ -1,7 +1,5 @@
-from dataclasses import field
-from json import JSONEncoder
+from itertools import chain
 from multiprocessing import context
-from re import template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -23,10 +21,13 @@ def home(request):
 
 @login_required
 def posts_user(request):
-    tickets = Ticket.objects.filter(user=request.user)
+    tickets = Ticket.objects.filter(user=request.user).order_by('-time_created')
+    reviews = Review.objects.filter(user=request.user).order_by('-time_created')
+    records = sorted(chain(tickets, reviews), key=lambda date: date.time_created)
     return render(request,
                   'review/posts.html',
-                  context={'tickets': tickets})
+                  context={
+                      'records': records,})
 
 @login_required
 def create_ticket(request):
