@@ -64,7 +64,9 @@ class EditTicket(UpdateView):
         return reverse_lazy(self.success_url, kwargs={'id': self.object.id})
             
 class DeleteTicket(DeleteView):
-    pass
+    model = Ticket
+    template_name = 'review/delete-ticket.html'
+    success_url = reverse_lazy('posts')
 
 class ReviewFormView(View):
     form_class = ReviewForm
