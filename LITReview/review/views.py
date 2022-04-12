@@ -101,9 +101,12 @@ class FollowsList(ListView):
     
     def get(self, request):
         user_followeds = UserFollows.objects.filter(user=request.user)
+        user_follow = UserFollows.objects.filter(followed_user=request.user)
         return render(request,
                       self.template_name,
-                      context={'users': user_followeds})
+                      context={
+                          'followed': user_followeds,
+                          'follow': user_follow})
 
 @login_required
 def search_follows(request):
@@ -122,4 +125,5 @@ def add_follow(request):
         user_follow = User.objects.get(id=id_user)
         followed = UserFollows.objects.create(user=request.user, followed_user=user_follow)
         return render(request,
-                      'review/followed-user.html')
+                      'review/followed-user.html',
+                      context={'users': followed})

@@ -6,5 +6,22 @@
 </form>
 <div class="users-list">
 </div>
-{% include 'review/followed-user.html' %}
+<p>Vous suivez :</p>
+<ul id="followed">
+    {% for user in followed %}
+    <li>
+    <p>{{ user.followed_user.username }}</p>
+    <button value="{{ user.followed_user.id }}">Se désabonner</button>
+    </li>
+    {% endfor %}
+</ul>
+<p>Vous suivent :</p>
+<ul id="follow">
+    {% for user in follow %}
+    <li>
+    <p>{{ user.user.username }}</p>
+    </li>
+    {% endfor %}
+
+</ul>
 {% endblock %}

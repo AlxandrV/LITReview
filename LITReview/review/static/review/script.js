@@ -1,8 +1,8 @@
 search_bar = document.getElementsByName('search')[0]
 search_input = document.getElementsByName('search-value')[0]
 user_list = document.getElementsByClassName('users-list')[0]
+users_followed = document.getElementById('followed')
 token = document.getElementsByName('csrfmiddlewaretoken')[0].value
-
 
 // Ajax
 function xhr(option) {
@@ -48,6 +48,9 @@ search_bar.addEventListener('input', () => {
                             'data': form
                         }
                         let xhr_follow = await xhr(option)
+                        users_followed.insertAdjacentHTML('afterbegin', xhr_follow);
+
+                        btn.parentNode.remove()
                     }
                     add_follow()
                 })
