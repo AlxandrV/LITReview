@@ -32,12 +32,15 @@ urlpatterns = [
     path('home/', review.views.home, name='home' ),
     path('posts/', review.views.posts_user, name='posts'),
     path('posts/create-ticket/', review.views.create_ticket, name='create-ticket'),
+    path('posts/edit-ticket/<int:pk>/', review.views.EditTicket.as_view(), name='edit-ticket'),
+    path('posts/delete-ticket/<int:id>/', review.views.DeleteTicket.as_view(), name='delete-ticket'),
     path('posts/<int:id>/', review.views.DetailTicket.as_view(), name='detail-ticket'),
     path('posts/<int:id>/add/', review.views.ReviewFormView.as_view(), name='response'),
     path('posts/new-review/', review.views.new_review, name='new-review'),
     path('follows/', review.views.FollowsList.as_view(), name='follows'),
     path('follows/search-follows/', review.views.search_follows, name='search-follows'),
     path('follows/add-follow/', review.views.add_follow, name='add-follow'),
+    path('follows/unfollow/', review.views.unfollow, name='unfollow')
 ]
 
 if settings.DEBUG:

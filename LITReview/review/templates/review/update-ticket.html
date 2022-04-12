@@ -1,0 +1,12 @@
+{% extends 'review/base.html' %}
+{% block content %}
+<h2>Mise à jour du ticket</h2>
+<a href="{% url 'posts' %}">Retour aux posts</a>
+<div class="bloc">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Mettre à jour">
+    </form>
+</div>
+{% endblock %}

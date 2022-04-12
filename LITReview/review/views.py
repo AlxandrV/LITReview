@@ -1,10 +1,14 @@
+from dataclasses import field
+from json import JSONEncoder
 from multiprocessing import context
+from re import template
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.db.models import Q
@@ -49,7 +53,19 @@ class DetailTicket(DetailView):
         return render(request,
                   'review/detail-ticket.html',
                   context={'ticket': ticket, 'reviews': reviews})
+        
+class EditTicket(UpdateView):
+    model = Ticket
+    form_class = TicketForm
+    template_name = 'review/update-ticket.html'
+    success_url = 'detail-ticket'
     
+    def get_success_url(self):
+        return reverse_lazy(self.success_url, kwargs={'id': self.object.id})
+            
+class DeleteTicket(DeleteView):
+    pass
+
 class ReviewFormView(View):
     form_class = ReviewForm
     template_name = 'review/create-review.html'
@@ -126,4 +142,11 @@ def add_follow(request):
         followed = UserFollows.objects.create(user=request.user, followed_user=user_follow)
         return render(request,
                       'review/followed-user.html',
-                      context={'users': followed})
+                      context={'user': user_follow})
+@login_required
+def unfollow(request):
+    if request.method == 'POST':
+        id_user_unfollow = request.POST.get('id-user')
+        user_unfollow = User.objects.get(id=id_user_unfollow)
+        unfollow = UserFollows.objects.filter(user=request.user, followed_user=user_unfollow).delete()
+        return JsonResponse({'delete': user_unfollow.id})

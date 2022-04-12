@@ -4,6 +4,8 @@ user_list = document.getElementsByClassName('users-list')[0]
 users_followed = document.getElementById('followed')
 token = document.getElementsByName('csrfmiddlewaretoken')[0].value
 
+console.log(users_followed)
+
 // Ajax
 function xhr(option) {
     return new Promise(function(resolve) {
@@ -48,8 +50,7 @@ search_bar.addEventListener('input', () => {
                             'data': form
                         }
                         let xhr_follow = await xhr(option)
-                        users_followed.insertAdjacentHTML('afterbegin', xhr_follow);
-
+                        users_followed.insertAdjacentHTML('afterbegin', xhr_follow)
                         btn.parentNode.remove()
                     }
                     add_follow()
@@ -60,3 +61,25 @@ search_bar.addEventListener('input', () => {
         search_func()
     }
 })
+
+unfollow_btn = Array.from(users_followed.getElementsByTagName('BUTTON'))
+unfollow_btn.forEach(btn => {
+    btn.addEventListener('click', () => {
+        let unfollow = async() => {
+            form = new FormData()
+            form.append('id-user', btn.value)
+            const option = {
+                'type': 'POST',
+                'header': token,
+                'url': 'unfollow/',
+                'data': form
+            }
+            let xhr_unfollow = await xhr(option)
+            JSON_res = JSON.parse(xhr_unfollow)
+            if (btn.value == JSON_res.delete) {
+                btn.parentNode.remove()
+            }
+        }
+        unfollow()
+    })
+});

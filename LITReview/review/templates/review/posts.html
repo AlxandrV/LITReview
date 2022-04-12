@@ -6,10 +6,16 @@
 </ul>
 {% for ticket in tickets %}
 <div class="bloc">
-    <h3>{{ ticket.title }}</h3>
-    <img src="{{ ticket.image.url }}" alt="">
-    <p>{{ ticket.description }}</p>
-    <a href="{% url 'detail-ticket' ticket.id %}">Voir les critiques</a>
+    <div class="interactions">
+        <a href="{% url 'edit-ticket' ticket.id %}">Éditer</a>
+        <a href="{% url 'delete-ticket' ticket.id %}">Supprimer</a>
+    </div>
+    <div class="detail-ticket">
+        <h3>{{ ticket.title }}</h3>
+        <img src="{{ ticket.image.url }}" alt="">
+        <p>{{ ticket.description }}</p>
+        <a href="{% url 'detail-ticket' ticket.id %}">Voir les critiques</a>
+    </div>
 </div>
 {% endfor %}
 {% endblock %}
