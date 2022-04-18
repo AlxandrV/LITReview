@@ -4,7 +4,9 @@
     <h3>{{ ticket.title }}</h3>
     <img src="{{ ticket.image.url }}" alt="">
     <p>{{ ticket.description }}</p>
+    {% if review_user == 0 %}
     <a href="{% url 'response' ticket.id %}">Ajouter une critique</a>
+    {% endif %}
 </div>
 {% for review in reviews %}
 <div class="bloc">

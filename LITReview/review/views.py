@@ -54,9 +54,14 @@ class DetailTicket(DetailView):
     def get(self, request, id):
         ticket = self.ticket_model.objects.get(id=id)
         reviews = self.review_model.objects.filter(ticket=ticket).order_by('-time_created')[:10]
+        review_user = self.review_model.objects.filter(ticket=ticket, user=request.user).count()
+        print(review_user)
         return render(request,
                   'review/detail-ticket.html',
-                  context={'ticket': ticket, 'reviews': reviews})
+                  context={
+                      'ticket': ticket,
+                      'reviews': reviews,
+                      'review_user': review_user})
         
 class EditTicket(UpdateView):
     model = Ticket
@@ -78,8 +83,12 @@ class ReviewFormView(View):
     success_url = 'review/detail-ticket.html'
     
     def get(self, request, id):
-        form = self.form_class()
-        return render(request, self.template_name, context={'form': form})
+        review_user = Review.objects.filter(ticket=Ticket.objects.get(id=id), user=request.user).count()
+        if review_user == 0:            
+            form = self.form_class()
+            return render(request, self.template_name, context={'form': form})
+        else:
+            return redirect('detail-ticket', id=id)
         
     def post(self, request, id):
         form = self.form_class(request.POST)
