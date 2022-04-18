@@ -1,4 +1,34 @@
 {% extends 'review/base.html' %}
 {% block content %}
 <p>Connecté en tant que {{ request.user }}</p>
+{% for element in records %}
+    {% if element.title %}
+    <div class="bloc">
+        {% if user.is_authenticated == element.user %}
+        <div class="interactions">
+            <a href="{% url 'edit-ticket' element.id %}">Éditer</a>
+            <a href="{% url 'delete-ticket' element.id %}">Supprimer</a>
+        </div>
+        {% endif %}
+        <h3>{{ element.title }}</h3>
+        <img src="{{ element.image.url }}" alt="">
+        <p>{{ element.description }}</p>
+        <a href="{% url 'detail-ticket' element.id %}">Voir les critiques</a>
+    </div>
+    {% else %}
+    <div class="bloc">
+        {% if user.is_authenticated == element.user %}
+        <div class="interactions">
+            <a href="{% url 'edit-review' element.id %}">Éditer</a>
+            <a href="{% url 'delete-review' element.id %}">Supprimer</a>
+        </div>
+        {% endif %}
+        <p>Notes : {{ element.rating }}/5</p>
+        <p>{{ element.user }} le {{ element.time_created }}</p>
+        <p>{{ element.headline }}</p>
+        <p>{{ element.body }}</p>
+    </div>
+    {% endif %}
+{% endfor %}
+
 {% endblock %}

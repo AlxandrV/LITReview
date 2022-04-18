@@ -16,14 +16,20 @@ from review.forms import TicketForm, ReviewForm
 
 @login_required
 def home(request):
+    followed = UserFollows.objects.filter(user=request.user).values('followed_user')
+    tickets = Ticket.objects.filter(Q(user__in=followed) | Q(user=request.user))
+    reviews = Review.objects.filter(Q(user__in=followed) | Q(user=request.user))
+    records = sorted(chain(tickets, reviews), key=lambda x: x.time_created, reverse=True)
     return render(request,
-                  'review/home.html')
+                  'review/home.html',
+                  context={
+                      'records': records,})
 
 @login_required
 def posts_user(request):
     tickets = Ticket.objects.filter(user=request.user).order_by('-time_created')
     reviews = Review.objects.filter(user=request.user).order_by('-time_created')
-    records = sorted(chain(tickets, reviews), key=lambda date: date.time_created)
+    records = sorted(chain(tickets, reviews), key=lambda x: x.time_created, reverse=True)
     ticket = Ticket.objects.get(id=1)
     review = ticket.review_set.all()
     print(review)
@@ -55,7 +61,6 @@ class DetailTicket(DetailView):
         ticket = self.ticket_model.objects.get(id=id)
         reviews = self.review_model.objects.filter(ticket=ticket).order_by('-time_created')[:10]
         review_user = self.review_model.objects.filter(ticket=ticket, user=request.user).count()
-        print(review_user)
         return render(request,
                   'review/detail-ticket.html',
                   context={
