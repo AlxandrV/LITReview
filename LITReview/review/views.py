@@ -2,6 +2,7 @@ from itertools import chain
 from multiprocessing import context
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -53,7 +54,7 @@ def create_ticket(request):
                   'review/create-ticket.html',
                   {'form': form})
     
-class DetailTicket(DetailView):
+class DetailTicket(LoginRequiredMixin, DetailView):
     ticket_model = Ticket
     review_model = Review
     
@@ -68,21 +69,29 @@ class DetailTicket(DetailView):
                       'reviews': reviews,
                       'review_user': review_user})
         
-class EditTicket(UpdateView):
+class EditTicket(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ticket
     form_class = TicketForm
     template_name = 'review/update-ticket.html'
     success_url = 'detail-ticket'
     
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
+    
     def get_success_url(self):
         return reverse_lazy(self.success_url, kwargs={'id': self.object.id})
             
-class DeleteTicket(DeleteView):
+class DeleteTicket(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Ticket
     template_name = 'review/delete-ticket.html'
     success_url = reverse_lazy('posts')
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
 
-class ReviewFormView(View):
+class ReviewFormView(LoginRequiredMixin, View):
     form_class = ReviewForm
     template_name = 'review/create-review.html'
     success_url = 'review/detail-ticket.html'
@@ -107,19 +116,27 @@ class ReviewFormView(View):
                       self.success_url,
                       context={'ticket': ticket})
         
-class EditReview(UpdateView):
+class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
     form_class = ReviewForm
     template_name = 'review/update-review.html'
     success_url = 'detail-ticket'
     
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
+    
     def get_success_url(self):
         return reverse_lazy(self.success_url, kwargs={'id': self.object.id})
             
-class DeleteReview(DeleteView):
+class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
     template_name = 'review/delete-review.html'
     success_url = reverse_lazy('posts')
+    
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
 
 @login_required
 def new_review(request):
@@ -146,7 +163,7 @@ def new_review(request):
                   'review/new-review.html', 
                   context={'rform': rform, 'tform': tform})
     
-class FollowsList(ListView):
+class FollowsList(LoginRequiredMixin, ListView):
     template_name = 'review/follows.html'
     
     def get(self, request):
