@@ -1,0 +1,19 @@
+{% extends 'review/base.html' %}
+{% block content %}
+<div class="bloc">
+    <div class="bloc">
+        <p>Notes : {{ review.rating }}/5</p>
+        <p>{{ review.user }} le {{ review.time_created }}</p>
+        <p>{{ review.headline }}</p>
+        <p>{{ review.body }}</p>
+    </div>
+    <form action="" method="post" class="delete">
+        {% csrf_token %}
+        <p>Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
+        <div class="choice-btn">
+            <a href="{% url 'detail-ticket' review.ticket.id %}">Ne pas supprimer</a>
+            <input type="submit" value="Confirmer">
+        </div>
+    </form>
+</div>
+{% endblock %}

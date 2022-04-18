@@ -24,6 +24,9 @@ def posts_user(request):
     tickets = Ticket.objects.filter(user=request.user).order_by('-time_created')
     reviews = Review.objects.filter(user=request.user).order_by('-time_created')
     records = sorted(chain(tickets, reviews), key=lambda date: date.time_created)
+    ticket = Ticket.objects.get(id=1)
+    review = ticket.review_set.all()
+    print(review)
     return render(request,
                   'review/posts.html',
                   context={
@@ -89,6 +92,20 @@ class ReviewFormView(View):
         return render(request,
                       self.success_url,
                       context={'ticket': ticket})
+        
+class EditReview(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = 'review/update-review.html'
+    success_url = 'detail-ticket'
+    
+    def get_success_url(self):
+        return reverse_lazy(self.success_url, kwargs={'id': self.object.id})
+            
+class DeleteReview(DeleteView):
+    model = Review
+    template_name = 'review/delete-review.html'
+    success_url = reverse_lazy('posts')
 
 @login_required
 def new_review(request):

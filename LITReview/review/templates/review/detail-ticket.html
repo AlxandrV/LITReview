@@ -8,6 +8,12 @@
 </div>
 {% for review in reviews %}
 <div class="bloc">
+    {% if user.is_authenticated == review.user.id %}
+    <div class="interactions">
+        <a href="{% url 'edit-review' review.id %}">Éditer</a>
+        <a href="{% url 'delete-review' review.id %}">Supprimer</a>
+    </div>
+    {% endif %}
     <p>Notes : {{ review.rating }}/5</p>
     <p>{{ review.user }} le {{ review.time_created }}</p>
     <p>{{ review.headline }}</p>
