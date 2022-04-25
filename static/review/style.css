@@ -11,7 +11,6 @@
   margin: auto; }
 
 a {
-  background-color: aqua;
   text-decoration: none; }
 
 p {
@@ -78,5 +77,24 @@ form input {
   max-width: 100px;
   margin: 50px auto;
   display: block; }
+
+header {
+  display: flex;
+  height: 50px;
+  margin: auto 50px; }
+  header img {
+    width: 50px; }
+  header div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; }
+    header div nav > a {
+      margin: auto 15px;
+      color: #000000; }
+    header div nav > .active {
+      border-bottom: solid 2px; }
+  header .btn-return {
+    margin: auto 0; }
 
 /*# sourceMappingURL=style.css.map */

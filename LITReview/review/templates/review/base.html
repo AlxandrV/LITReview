@@ -12,13 +12,15 @@
 <body>
     {% if user.is_authenticated %}
         <header>
-            <h2>LITReview</h2>
-            <nav>
-                <a href="{% url 'home' %}">Flux</a>
-                <a href="{% url 'posts' %}">Posts</a>
-                <a href="{% url 'follows' %}">Abonnements</a>
-                <a href="{% url 'logout' %}">Se déconnecter</a>
-            </nav>
+            <img src="{% static 'review/images/logo_2.png' %}" alt="Logo LitReview">
+            <div class="menu">
+                <nav>
+                    <a href="{% url 'home' %}" class="{% if request.get_full_path == "/home/"  %}active{% endif %}">Flux</a>
+                    <a href="{% url 'posts' %}" class="{% if request.get_full_path == "/posts/"  %}active{% endif %}">Posts</a>
+                    <a href="{% url 'follows' %}" class="{% if request.get_full_path == "/follows/"  %}active{% endif %}">Abonnements</a>
+                </nav>
+                <a href="{% url 'logout' %}" class="btn-return"><p>Se déconnecter</p></a>            
+            </div>
         </header>
         {% block content %}{% endblock %}
     {% else %}

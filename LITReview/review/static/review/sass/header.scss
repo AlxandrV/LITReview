@@ -1,0 +1,27 @@
+header{
+    display: flex;
+    height: 50px;
+    margin: auto 50px;
+    img{
+        width: 50px;
+    }
+    
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        nav > a{
+            margin: auto 15px;
+            color: $font_primary;
+        }
+
+        nav > .active{
+            border-bottom: solid 2px;
+        }
+    }
+    .btn-return{
+        margin: auto 0;
+    }
+}
