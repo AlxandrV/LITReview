@@ -1,19 +1,19 @@
 {% extends 'review/base.html' %}
 {% block authentication %}
-
+{% load static %}
+<img src="{% static 'review/images/logo.png' %}" alt="Logo LitReview" class="logo-auth">
 <div class="d-flex jcont-center">
     <div class="bloc">
-        <div>
-            <p>Inscrivez-vous maintenant</p>
-            <a href="{% url 'signup' %}">S'inscrire</a>
-        </div>
+        <h3>Inscription</h3>
+        <a href="{% url 'signup' %}" class="btn"><p>S'inscrire</p></a>
     </div>
     <div class="bloc">
-        <p>{{ message }}message erreur</p>
+        <h3>Connexion</h3>
+        <p class="error">{{ message }}</p>
         <form method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <button type="submit">Se connecter</button>
+            <button type="submit" class="btn"><p>Se connecter</p></button>
         </form>
     </div>
 </div>

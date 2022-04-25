@@ -60,7 +60,7 @@ class DetailTicket(LoginRequiredMixin, DetailView):
     
     def get(self, request, id):
         ticket = self.ticket_model.objects.get(id=id)
-        reviews = self.review_model.objects.filter(ticket=ticket).order_by('-time_created')[:10]
+        reviews = self.review_model.objects.filter(ticket=ticket).order_by('-time_created')
         review_user = self.review_model.objects.filter(ticket=ticket, user=request.user).count()
         return render(request,
                   'review/detail-ticket.html',
