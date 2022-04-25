@@ -2,7 +2,6 @@
 {% block authentication %}
 <div class="bloc">
     <h2>Inscription</h2>
-    <a href="{% url 'home' %}">Retour</a>
     {% if form.errors %}
         {{ form.errors }}
     {% endif %}
@@ -10,7 +9,10 @@
         {{ form.as_p }}
         {% csrf_token %}
         
-        <button type="submit">S’inscrire</button>
+        <div class="d-flex">
+            <a href="{% url 'home' %}" class="btn-return"><p>Retour</p></a>
+            <button type="submit" class="btn"><p>S’inscrire</p></button>        
+        </div>
     </form>
 </div>
 {% endblock %}

@@ -17,19 +17,35 @@ h3{
     box-sizing: border-box;
     padding: 15px;
     background-color: $bg_primary;
-    margin: 15px;
+    margin: 15px auto;
     min-width: 25%;
+    width: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-form label, form span{
-    display: block;
+form{
+    label, span{
+        display: block;
+    }
+
+    span, li{
+        color: $font_span;
+        font-style: italic;
+        font-size: $span;
+    }
+
+    input{
+        background: none;
+        border: 2px solid $bg_third;
+        border-right: 0;
+        border-top: 0;
+    }
 }
 
-.btn{
+.btn, .btn-return{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +53,6 @@ form label, form span{
     max-width: 130px;
     max-height: 32px;
     height: 100%;
-    background-color: $bg_secondary;
     cursor: pointer;
     border: none;
     box-shadow: 5px 5px 4px rgba(0, 0, 0, .25);
@@ -45,6 +60,14 @@ form label, form span{
     > *{
         color: $font_btn;
     }
+}
+
+.btn{
+    background-color: $bg_secondary;
+}
+
+.btn-return{
+    background-color: $bg_third;
 }
 
 .error{

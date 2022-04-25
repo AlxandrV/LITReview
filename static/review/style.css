@@ -26,8 +26,9 @@ h3 {
   box-sizing: border-box;
   padding: 15px;
   background-color: #FFE8D6;
-  margin: 15px;
+  margin: 15px auto;
   min-width: 25%;
+  width: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +37,18 @@ h3 {
 form label, form span {
   display: block; }
 
-.btn {
+form span, form li {
+  color: grey;
+  font-style: italic;
+  font-size: 0.95rem; }
+
+form input {
+  background: none;
+  border: 2px solid #CB997E;
+  border-right: 0;
+  border-top: 0; }
+
+.btn, .btn-return {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,13 +56,18 @@ form label, form span {
   max-width: 130px;
   max-height: 32px;
   height: 100%;
-  background-color: #A5A58D;
   cursor: pointer;
   border: none;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
   margin: 20px auto; }
-  .btn > * {
+  .btn > *, .btn-return > * {
     color: white; }
+
+.btn {
+  background-color: #A5A58D; }
+
+.btn-return {
+  background-color: #CB997E; }
 
 .error {
   color: #ff4c4ced;
