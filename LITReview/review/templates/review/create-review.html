@@ -1,10 +1,11 @@
 {% extends 'review/base.html' %}
 {% block content %}
+<a href="{% url 'detail-ticket' ticket_id %}" class="btn-return"><p>Retour</p></a>
 <div class="bloc">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Ajouter une critique">
+        <input type="submit" value="Ajouter une critique" class="btn">
     </form>
 </div>
 {% endblock %}

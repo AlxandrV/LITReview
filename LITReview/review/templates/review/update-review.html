@@ -1,7 +1,7 @@
 {% extends 'review/base.html' %}
 {% block content %}
 <h2>Mise à jour de la critique</h2>
-<a href="{% url 'posts' %}">Retour aux posts</a>
+<a href="{% url 'posts' %}" class="btn-return"><p>Retour</p></a>
 <div class="bloc">
     <form method="post">
         {% csrf_token %}

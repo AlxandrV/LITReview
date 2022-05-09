@@ -100,7 +100,7 @@ class ReviewFormView(LoginRequiredMixin, View):
         review_user = Review.objects.filter(ticket=Ticket.objects.get(id=id), user=request.user).count()
         if review_user == 0:            
             form = self.form_class()
-            return render(request, self.template_name, context={'form': form})
+            return render(request, self.template_name, context={'form': form, 'ticket_id': id})
         else:
             return redirect(self.success_url, id=id)
         
