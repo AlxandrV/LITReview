@@ -70,6 +70,20 @@ form{
         border-right: 0;
         border-top: 0;
     }
+
+    input#image-clear_id{
+        display: block;
+        margin-top: 15px;
+    }
+
+    input#id_image{
+        border: none;
+    }
+
+    textarea{
+        box-sizing: border-box;
+        width: 100%;
+    }
 }
 
 .btn, .btn-return{
@@ -119,6 +133,14 @@ form{
 
     .btn{
         margin: 0 auto;
+    }
+
+    .interactions{
+        display: flex;
+        justify-content: center;
+        > *{
+            margin: 10px;
+        }
     }
 }
 

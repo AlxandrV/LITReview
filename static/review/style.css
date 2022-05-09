@@ -71,6 +71,17 @@ form input {
   border-right: 0;
   border-top: 0; }
 
+form input#image-clear_id {
+  display: block;
+  margin-top: 15px; }
+
+form input#id_image {
+  border: none; }
+
+form textarea {
+  box-sizing: border-box;
+  width: 100%; }
+
 .btn, .btn-return {
   display: flex;
   align-items: center;
@@ -109,6 +120,11 @@ form input {
     border: solid 2px #CB997E; }
   .ticket .btn, .review .btn {
     margin: 0 auto; }
+  .ticket .interactions, .review .interactions {
+    display: flex;
+    justify-content: center; }
+    .ticket .interactions > *, .review .interactions > * {
+      margin: 10px; }
 
 .user-date {
   display: flex;

@@ -5,17 +5,19 @@
     {% if element.title %}
     <div class="ticket">
         <div class="user-date">
-            {% if user.is_authenticated == element.user %}
+            {% if user == element.user %}
             <p class="user-publish">Vous avez demandé une critique</p>
-            <div class="interactions">
-                <a href="{% url 'edit-ticket' element.id %}" class="btn"><p>Éditer</p></a>
-                <a href="{% url 'delete-ticket' element.id %}" class="btn-return"><p>Supprimer</p></a>
-            </div>
             {% else %}
             <p class="user-publish">{{ element.user }} à demandé une critique</p>
             {% endif %} 
             <p class="date">{{ element.time_created }}</p>        
         </div>
+        {% if user == element.user %}
+        <div class="interactions">
+            <a href="{% url 'edit-ticket' element.id %}" class="btn"><p>Éditer</p></a>
+            <a href="{% url 'delete-ticket' element.id %}" class="btn-return"><p>Supprimer</p></a>
+        </div>
+        {% endif %}
         <h3>{{ element.title }}</h3>
         <div class="element-ticket">
             <img src="{{ element.image.url }}" alt="">
@@ -29,23 +31,25 @@
     {% else %}
     <div class="review">
         <div class="user-date">
-            {% if user.is_authenticated == element.user %}
+            {% if user == element.user %}
             <p class="user-publish">Vous avez publié une critique</p>
-            <div class="interactions">
-                <a href="{% url 'edit-review' element.id %}">Éditer</a>
-                <a href="{% url 'delete-review' element.id %}">Supprimer</a>
-            </div>
             {% else %}
             <p class="user-publish">{{ element.user }} à publié une critique</p>
             {% endif %}        
             <p class="date">{{ element.time_created }}</p>        
         </div>
+        {% if user == element.user %}
+        <div class="interactions">
+            <a href="{% url 'edit-review' element.id %}" class="btn"><p>Éditer</p></a>
+            <a href="{% url 'delete-review' element.id %}" class="btn-return"><p>Supprimer</p></a>
+        </div>
+        {% endif %}
         <p>Notes : {{ element.rating }}/5</p>
         <h3>{{ element.headline }}</h3>
         <p>{{ element.body }}</p>
         <div class="ticket">
             <div class="user-date">
-                {% if user.is_authenticated == element.ticket.user %}
+                {% if user == element.ticket.user %}
                 <p class="user-publish">Vous avez demandé une critique</p>
                 {% else %}
                 <p class="user-publish">{{ element.ticket.user }} à demandé une critique</p>
