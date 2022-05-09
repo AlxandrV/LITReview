@@ -1,17 +1,22 @@
 {% extends 'review/base.html' %}
 {% block content %}
-<form action="" method="post" name="search">
-    {% csrf_token %}
-    <input type="search" name="search-value">
-</form>
-<div class="users-list">
+<div class="search-form">
+    <h3>Ajouter un utilisateurs</h3>
+    <form action="" method="post" name="search">
+        {% csrf_token %}
+        <label for="username-follow">Nom de l'utilisateurs :</label>
+        <input type="search" id="username-follow" name="search-value">
+    </form>
+    <div class="users-list">
+    </div>
+
 </div>
 <p>Vous suivez :</p>
 <ul id="followed">
     {% for user in followed %}
     <li>
     <p>{{ user.followed_user.username }}</p>
-    <button value="{{ user.followed_user.id }}">Se désabonner</button>
+    <button value="{{ user.followed_user.id }}" class="btn-return m-none"><p>Se désabonner</p></button>
     </li>
     {% endfor %}
 </ul>

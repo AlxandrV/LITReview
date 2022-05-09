@@ -10,6 +10,9 @@
 .m-auto {
   margin: auto; }
 
+.m-none {
+  margin: 0; }
+
 a {
   text-decoration: none; }
 
@@ -20,6 +23,27 @@ p {
 h3 {
   color: #000000;
   size: 1.25rem; }
+
+main {
+  max-width: 1200px;
+  margin: auto; }
+  main > * {
+    width: 100%; }
+
+ul {
+  padding: 0; }
+
+li {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #FFE8D6;
+  margin: 10px auto;
+  box-sizing: border-box;
+  padding: 5px; }
+  li p {
+    margin: auto 0; }
 
 .bloc {
   box-sizing: border-box;
@@ -53,12 +77,11 @@ form input {
   justify-content: center;
   width: 100%;
   max-width: 130px;
-  max-height: 32px;
-  height: 100%;
+  height: 32px;
   cursor: pointer;
   border: none;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
-  margin: 20px auto; }
+  margin: 0; }
   .btn > *, .btn-return > * {
     color: white; }
 
@@ -68,15 +91,69 @@ form input {
 .btn-return {
   background-color: #CB997E; }
 
+.return {
+  margin-left: 0; }
+
 .error {
   color: #ff4c4ced;
   font-size: 0.95rem;
   font-style: italic; }
 
+.ticket, .review {
+  width: 100%;
+  background-color: #FFE8D6;
+  box-sizing: border-box;
+  padding: 15px;
+  margin: 15px auto; }
+  .ticket > .ticket, .review > .ticket {
+    border: solid 2px #CB997E; }
+  .ticket .btn, .review .btn {
+    margin: 0 auto; }
+
+.user-date {
+  display: flex;
+  justify-content: space-between; }
+
+.date {
+  margin: 0;
+  font-size: 0.95rem;
+  color: grey; }
+
+.user-publish {
+  color: #6B705C;
+  font-style: italic;
+  margin: 0 0 35px; }
+
+h3 {
+  margin: 10px 0 15px; }
+
+.element-ticket {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px; }
+  .element-ticket img {
+    max-width: 300px; }
+  .element-ticket .description {
+    box-sizing: border-box;
+    padding: 15px; }
+    .element-ticket .description > :first-child {
+      font-weight: bold; }
+  .element-ticket .detail-input {
+    margin: auto; }
+
+.search-form {
+  background-color: #FFE8D6;
+  box-sizing: border-box;
+  padding: 15px;
+  margin: 15px auto; }
+
 .logo-auth {
   max-width: 100px;
   margin: 50px auto;
   display: block; }
+
+.bloc .btn, .bloc .btn-return {
+  margin: 0 auto; }
 
 header {
   display: flex;

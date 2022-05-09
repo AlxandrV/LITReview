@@ -1,25 +1,54 @@
 {% extends 'review/base.html' %}
 {% block content %}
-<div class="bloc">
-    <h3>{{ ticket.title }}</h3>
-    <img src="{{ ticket.image.url }}" alt="">
-    <p>{{ ticket.description }}</p>
-    {% if review_user == 0 %}
-    <a href="{% url 'response' ticket.id %}">Ajouter une critique</a>
-    {% endif %}
-</div>
-{% for review in reviews %}
-<div class="bloc">
-    {% if user.is_authenticated == review.user.id %}
-    <div class="interactions">
-        <a href="{% url 'edit-review' review.id %}">Éditer</a>
-        <a href="{% url 'delete-review' review.id %}">Supprimer</a>
+    <a href="{% url 'home' %}" class="btn-return return"><p>Retour</p></a>
+    <div class="ticket">
+        <div class="user-date">
+            {% if user.is_authenticated == ticket.user %}
+            <p class="user-publish">Vous avez demandé une critique</p>
+            <div class="interactions">
+                <a href="{% url 'edit-ticket' ticket.id %}" class="btn"><p>Éditer</p></a>
+                <a href="{% url 'delete-ticket' ticket.id %}" class="btn-return"><p>Supprimer</p></a>
+            </div>
+            {% else %}
+            <p class="user-publish">{{ ticket.user }} à demandé une critique</p>
+            {% endif %} 
+            <p class="date">{{ ticket.time_created }}</p>        
+        </div>
+        <h3>{{ ticket.title }}</h3>
+        <div class="element-ticket">
+            <img src="{{ ticket.image.url }}" alt="">
+            <div class="description">
+                <p>Decription :</p>
+                <p>{{ ticket.description }}</p>        
+            </div>
+        </div>
+        {% if review_user == 0 %}
+        <a href="{% url 'response' ticket.id %}" class="btn"><p>Nouvelle critique</p></a>
+        {% endif %}
     </div>
-    {% endif %}
-    <p>Notes : {{ review.rating }}/5</p>
-    <p>{{ review.user }} le {{ review.time_created }}</p>
-    <p>{{ review.headline }}</p>
-    <p>{{ review.body }}</p>
-</div>
+{% for review in reviews %}
+    <div class="review">
+        {% if user.is_authenticated == review.user %}
+        <div class="interactions">
+            <a href="{% url 'edit-review' review.id %}">Éditer</a>
+            <a href="{% url 'delete-review' review.id %}">Supprimer</a>
+        </div>
+        {% endif %}
+        <div class="user-date">
+            {% if user.is_authenticated == review.user %}
+            <p class="user-publish">Vous avez publié une critique</p>
+            <div class="interactions">
+                <a href="{% url 'edit-review' review.id %}">Éditer</a>
+                <a href="{% url 'delete-review' review.id %}">Supprimer</a>
+            </div>
+            {% else %}
+            <p class="user-publish">{{ review.user }} à publié une critique</p>
+            {% endif %}        
+            <p class="date">{{ review.time_created }}</p>        
+        </div>
+        <p>Notes : {{ review.rating }}/5</p>
+        <h3>{{ review.headline }}</h3>
+        <p>{{ review.body }}</p>
+    </div>
 {% endfor %}
 {% endblock %}

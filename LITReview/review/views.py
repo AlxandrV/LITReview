@@ -94,7 +94,7 @@ class DeleteTicket(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class ReviewFormView(LoginRequiredMixin, View):
     form_class = ReviewForm
     template_name = 'review/create-review.html'
-    success_url = 'review/detail-ticket.html'
+    success_url = 'detail-ticket'
     
     def get(self, request, id):
         review_user = Review.objects.filter(ticket=Ticket.objects.get(id=id), user=request.user).count()
@@ -102,7 +102,7 @@ class ReviewFormView(LoginRequiredMixin, View):
             form = self.form_class()
             return render(request, self.template_name, context={'form': form})
         else:
-            return redirect('detail-ticket', id=id)
+            return redirect(self.success_url, id=id)
         
     def post(self, request, id):
         form = self.form_class(request.POST)
@@ -112,9 +112,7 @@ class ReviewFormView(LoginRequiredMixin, View):
             ticket = Ticket.objects.get(id=id)
             review.ticket = ticket
             review.save()
-        return render(request,
-                      self.success_url,
-                      context={'ticket': ticket})
+        return redirect(self.success_url, id=id)
         
 class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
@@ -127,7 +125,7 @@ class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return obj.user == self.request.user
     
     def get_success_url(self):
-        return reverse_lazy(self.success_url, kwargs={'id': self.object.id})
+        return reverse_lazy(self.success_url, kwargs={'id': self.object.ticket.id})
             
 class DeleteReview(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review

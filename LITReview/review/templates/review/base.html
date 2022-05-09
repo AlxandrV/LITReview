@@ -22,7 +22,9 @@
                 <a href="{% url 'logout' %}" class="btn-return"><p>Se déconnecter</p></a>            
             </div>
         </header>
-        {% block content %}{% endblock %}
+        <main>
+            {% block content %}{% endblock %}
+        </main>
     {% else %}
         {% block authentication %}{% endblock %}
     {% endif %}

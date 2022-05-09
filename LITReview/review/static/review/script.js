@@ -39,6 +39,7 @@ search_bar.addEventListener('input', () => {
 
             user_btn = Array.from(user_list.getElementsByTagName('BUTTON'))
             user_btn.forEach(btn => {
+                btn.classList.add('btn')
                 btn.addEventListener('click', () => {
                     let add_follow = async() => {
                         form = new FormData()
