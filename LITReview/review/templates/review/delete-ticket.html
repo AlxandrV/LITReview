@@ -1,18 +1,24 @@
 {% extends 'review/base.html' %}
 {% block content %}
-<div class="bloc">
-    <div class="detail-ticket">
-        <h3>{{ ticket.title }}</h3>
+<div class="ticket">
+    <div class="user-date">
+        <p class="user-publish">Vous avez demandé une critique</p>
+        <p class="date">{{ ticket.time_created }}</p>        
+    </div>
+    <h3>{{ ticket.title }}</h3>
+    <div class="element-ticket">
         <img src="{{ ticket.image.url }}" alt="">
-        <p>{{ ticket.description }}</p>
-        <a href="{% url 'detail-ticket' ticket.id %}">Voir les critiques</a>
+        <div class="description">
+            <p>Decription :</p>
+            <p>{{ ticket.description }}</p>        
+        </div>
     </div>
     <form action="" method="post" class="delete">
         {% csrf_token %}
-        <p>Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
-        <div class="choice-btn">
-            <a href="{% url 'detail-ticket' ticket.id %}">Ne pas supprimer</a>
-            <input type="submit" value="Confirmer">
+        <p class="confirm-sentence">Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
+        <div class="interactions">
+            <a href="{% url 'detail-ticket' ticket.id %}" class="btn-return"><p>Ne pas supprimer</p></a>
+            <input type="submit" value="Confirmer" class="btn">
         </div>
     </form>
 </div>

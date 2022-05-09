@@ -1,10 +1,12 @@
 {% extends 'review/base.html' %}
 {% block content %}
 <h2>Créer un ticket</h2>
-<a href="{% url 'posts' %}">Retour aux posts</a>
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Créer">
-</form>
+<a href="{% url 'posts' %}" class="btn-return"><p>Retour</p></a>
+<div class="ticket">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Créer" class="btn">
+    </form>
+</div>
 {% endblock %}

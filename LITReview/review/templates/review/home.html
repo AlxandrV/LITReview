@@ -1,6 +1,5 @@
 {% extends 'review/base.html' %}
 {% block content %}
-<p>Connecté en tant que {{ request.user }}</p>
 {% for element in records %}
     {% if element.title %}
     <div class="ticket">

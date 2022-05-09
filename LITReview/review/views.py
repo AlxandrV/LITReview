@@ -112,7 +112,8 @@ class ReviewFormView(LoginRequiredMixin, View):
             ticket = Ticket.objects.get(id=id)
             review.ticket = ticket
             review.save()
-        return redirect(self.success_url, id=id)
+            return redirect(self.success_url, id=id)
+        return render(request, self.template_name, context={'form': form, 'ticket_id': id})
         
 class EditReview(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review

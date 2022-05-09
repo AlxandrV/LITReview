@@ -40,8 +40,8 @@
         </div>
         {% if user == review.user %}
         <div class="interactions">
-            <a href="{% url 'edit-ticket' ticket.id %}" class="btn"><p>Éditer</p></a>
-            <a href="{% url 'delete-ticket' ticket.id %}" class="btn-return"><p>Supprimer</p></a>
+            <a href="{% url 'edit-review' review.id %}" class="btn"><p>Éditer</p></a>
+            <a href="{% url 'delete-review' review.id %}" class="btn-return"><p>Supprimer</p></a>
         </div>
         {% endif %}
         <p>Notes : {{ review.rating }}/5</p>

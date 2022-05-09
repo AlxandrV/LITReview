@@ -76,7 +76,7 @@ form{
         margin-top: 15px;
     }
 
-    input#id_image{
+    input#id_image, input#id_tform-image{
         border: none;
     }
 
@@ -194,4 +194,16 @@ h3{
     box-sizing: border-box;
     padding: 15px;
     margin: 15px auto;
+}
+
+.confirm-sentence{
+    text-align: center;
+}
+
+.delete{
+    margin-top: 30px;
+}
+
+.separate{
+    border: 2px solid $bg_third;
 }

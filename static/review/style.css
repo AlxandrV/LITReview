@@ -75,7 +75,7 @@ form input#image-clear_id {
   display: block;
   margin-top: 15px; }
 
-form input#id_image {
+form input#id_image, form input#id_tform-image {
   border: none; }
 
 form textarea {
@@ -162,6 +162,15 @@ h3 {
   box-sizing: border-box;
   padding: 15px;
   margin: 15px auto; }
+
+.confirm-sentence {
+  text-align: center; }
+
+.delete {
+  margin-top: 30px; }
+
+.separate {
+  border: 2px solid #CB997E; }
 
 .logo-auth {
   max-width: 100px;
