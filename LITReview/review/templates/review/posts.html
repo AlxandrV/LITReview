@@ -6,26 +6,57 @@
 </ul>
 {% for element in records %}
     {% if element.title %}
-    <div class="bloc">
+    <div class="ticket">
+        <div class="user-date">
+            <p class="user-publish">Vous avez demandé une critique</p>
+            <p class="date">{{ element.time_created }}</p>        
+        </div>
         <div class="interactions">
-            <a href="{% url 'edit-ticket' element.id %}">Éditer</a>
-            <a href="{% url 'delete-ticket' element.id %}">Supprimer</a>
+            <a href="{% url 'edit-ticket' element.id %}" class="btn"><p>Éditer</p></a>
+            <a href="{% url 'delete-ticket' element.id %}" class="btn-return"><p>Supprimer</p></a>
         </div>
         <h3>{{ element.title }}</h3>
-        <img src="{{ element.image.url }}" alt="">
-        <p>{{ element.description }}</p>
-        <a href="{% url 'detail-ticket' element.id %}">Voir les critiques</a>
+        <div class="element-ticket">
+            <img src="{{ element.image.url }}" alt="">
+            <div class="description">
+                <p>Decription :</p>
+                <p>{{ element.description }}</p>        
+            </div>
+        </div>
+        <a href="{% url 'detail-ticket' element.id %}" class="btn detail-input"><p>Voir les critiques</p></a>
     </div>
     {% else %}
-    <div class="bloc">
+    <div class="review">
+        <div class="user-date">
+            <p class="user-publish">Vous avez publié une critique</p>
+            <p class="date">{{ element.time_created }}</p>        
+        </div>
         <div class="interactions">
-            <a href="{% url 'edit-review' element.id %}">Éditer</a>
-            <a href="{% url 'delete-review' element.id %}">Supprimer</a>
+            <a href="{% url 'edit-review' element.id %}" class="btn"><p>Éditer</p></a>
+            <a href="{% url 'delete-review' element.id %}" class="btn-return"><p>Supprimer</p></a>
         </div>
         <p>Notes : {{ element.rating }}/5</p>
-        <p>{{ element.user }} le {{ element.time_created }}</p>
-        <p>{{ element.headline }}</p>
+        <h3>{{ element.headline }}</h3>
         <p>{{ element.body }}</p>
+        <div class="ticket">
+            <div class="user-date">
+                {% if user == element.ticket.user %}
+                <p class="user-publish">Vous avez demandé une critique</p>
+                {% else %}
+                <p class="user-publish">{{ element.ticket.user }} à demandé une critique</p>
+                {% endif %} 
+                <p class="date">{{ element.ticket.time_created }}</p>        
+            </div>
+            <h3>{{ element.ticket.title }}</h3>
+            <div class="element-ticket">
+                <img src="{{ element.ticket.image.url }}" alt="">
+                <div class="description">
+                    <p>Decription :</p>
+                    <p>{{ element.ticket.description }}</p>        
+                </div>
+            </div>
+            <a href="{% url 'detail-ticket' element.ticket.id %}" class="btn detail-input"><p>Voir les critiques</p></a>
+        </div>
     </div>
     {% endif %}
 {% endfor %}
