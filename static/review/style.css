@@ -26,7 +26,7 @@ h3 {
 
 main {
   max-width: 1200px;
-  margin: auto; }
+  margin: 20px auto; }
   main > * {
     width: 100%; }
 
@@ -198,5 +198,41 @@ header {
       border-bottom: solid 2px; }
   header .btn-return {
     margin: auto 0; }
+
+@media (max-width: 991.98px) {
+  .bloc {
+    width: 40%; }
+  img {
+    width: 20vw;
+    height: fit-content; } }
+
+@media (max-width: 575.98px) {
+  .jcont-center {
+    flex-wrap: wrap; }
+  .bloc {
+    width: 80%; }
+  .btn-list {
+    flex-wrap: wrap; }
+    .btn-list > .btn, .btn-list .btn-return {
+      margin: 10px auto; }
+  .description :nth-child(2) {
+    height: 200px;
+    overflow: hidden; }
+  header {
+    flex-direction: column;
+    height: auto;
+    margin: 0; }
+    header img {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%); }
+    header .menu {
+      margin: 5px 10px;
+      width: auto; }
+      header .menu nav {
+        display: flex;
+        flex-direction: column; }
+      header .menu a {
+        margin: 5px 0; } }
 
 /*# sourceMappingURL=style.css.map */
