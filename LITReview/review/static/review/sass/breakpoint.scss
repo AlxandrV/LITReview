@@ -1,0 +1,29 @@
+@media (max-width: 640px){
+    header{
+        height: min-content;
+        flex-direction: column;
+        margin: auto 15px;
+        > img{
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
+        div nav{
+            display: flex;
+            flex-direction: column;
+            margin-top: 8px;
+            
+            > a {
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    .element-ticket{
+        flex-direction: column;
+
+        img{
+            margin: auto;
+        }
+    }
+}

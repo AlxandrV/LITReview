@@ -31,9 +31,9 @@ def posts_user(request):
     tickets = Ticket.objects.filter(user=request.user).order_by('-time_created')
     reviews = Review.objects.filter(user=request.user).order_by('-time_created')
     records = sorted(chain(tickets, reviews), key=lambda x: x.time_created, reverse=True)
-    ticket = Ticket.objects.get(id=1)
-    review = ticket.review_set.all()
-    print(review)
+    # ticket = Ticket.objects.get(id=1)
+    # review = ticket.review_set.all()
+    # print(review)
     return render(request,
                   'review/posts.html',
                   context={
@@ -179,7 +179,7 @@ def search_follows(request):
     if request.method == 'POST':
         value = request.POST.get('search-value')
         followeds = UserFollows.objects.filter(user=request.user)
-        users = User.objects.filter(Q(username__contains=value) & ~Q(id__in=[follow.followed_user.id for follow in followeds]))
+        users = User.objects.filter(Q(username__contains=value) & ~Q(id__in=[follow.followed_user.id for follow in followeds])).exclude(id=request.user.id)
         return render(request,
                       'review/users-list.html',
                       context={'users': users})

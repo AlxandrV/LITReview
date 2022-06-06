@@ -1,72 +1,76 @@
 {% extends 'review/base.html' %}
 {% block content %}
-{% for element in records %}
-    {% if element.title %}
-    <div class="ticket">
-        <div class="user-date">
-            {% if user == element.user %}
-            <p class="user-publish">Vous avez demandé une critique</p>
-            {% else %}
-            <p class="user-publish">{{ element.user }} à demandé une critique</p>
-            {% endif %} 
-            <p class="date">{{ element.time_created }}</p>        
-        </div>
-        {% if user == element.user %}
-        <div class="interactions">
-            <a href="{% url 'edit-ticket' element.id %}" class="btn"><p>Éditer</p></a>
-            <a href="{% url 'delete-ticket' element.id %}" class="btn-return"><p>Supprimer</p></a>
-        </div>
-        {% endif %}
-        <h3>{{ element.title }}</h3>
-        <div class="element-ticket">
-            <img src="{{ element.image.url }}" alt="">
-            <div class="description">
-                <p>Decription :</p>
-                <p>{{ element.description }}</p>        
-            </div>
-        </div>
-        <a href="{% url 'detail-ticket' element.id %}" class="btn detail-input"><p>Voir les critiques</p></a>
-    </div>
-    {% else %}
-    <div class="review">
-        <div class="user-date">
-            {% if user == element.user %}
-            <p class="user-publish">Vous avez publié une critique</p>
-            {% else %}
-            <p class="user-publish">{{ element.user }} à publié une critique</p>
-            {% endif %}        
-            <p class="date">{{ element.time_created }}</p>        
-        </div>
-        {% if user == element.user %}
-        <div class="interactions">
-            <a href="{% url 'edit-review' element.id %}" class="btn"><p>Éditer</p></a>
-            <a href="{% url 'delete-review' element.id %}" class="btn-return"><p>Supprimer</p></a>
-        </div>
-        {% endif %}
-        <p>Notes : {{ element.rating }}/5</p>
-        <h3>{{ element.headline }}</h3>
-        <p>{{ element.body }}</p>
+{% if records|length >= 1 %}
+    {% for element in records %}
+        {% if element.title %}
         <div class="ticket">
             <div class="user-date">
-                {% if user == element.ticket.user %}
+                {% if user == element.user %}
                 <p class="user-publish">Vous avez demandé une critique</p>
                 {% else %}
-                <p class="user-publish">{{ element.ticket.user }} à demandé une critique</p>
+                <p class="user-publish">{{ element.user }} à demandé une critique</p>
                 {% endif %} 
-                <p class="date">{{ element.ticket.time_created }}</p>        
+                <p class="date">{{ element.time_created }}</p>        
             </div>
-            <h3>{{ element.ticket.title }}</h3>
+            {% if user == element.user %}
+            <div class="interactions">
+                <a href="{% url 'edit-ticket' element.id %}" class="btn"><p>Éditer</p></a>
+                <a href="{% url 'delete-ticket' element.id %}" class="btn-return"><p>Supprimer</p></a>
+            </div>
+            {% endif %}
+            <h3>{{ element.title }}</h3>
             <div class="element-ticket">
-                <img src="{{ element.ticket.image.url }}" alt="">
+                <img src="{{ element.image.url }}" alt="">
                 <div class="description">
                     <p>Decription :</p>
-                    <p>{{ element.ticket.description }}</p>        
+                    <p>{{ element.description }}</p>        
                 </div>
             </div>
-            <a href="{% url 'detail-ticket' element.ticket.id %}" class="btn detail-input"><p>Voir les critiques</p></a>
+            <a href="{% url 'detail-ticket' element.id %}" class="btn detail-input"><p>Voir les critiques</p></a>
         </div>
-    </div>
-    {% endif %}
-{% endfor %}
+        {% else %}
+        <div class="review">
+            <div class="user-date">
+                {% if user == element.user %}
+                <p class="user-publish">Vous avez publié une critique</p>
+                {% else %}
+                <p class="user-publish">{{ element.user }} à publié une critique</p>
+                {% endif %}        
+                <p class="date">{{ element.time_created }}</p>        
+            </div>
+            {% if user == element.user %}
+            <div class="interactions">
+                <a href="{% url 'edit-review' element.id %}" class="btn"><p>Éditer</p></a>
+                <a href="{% url 'delete-review' element.id %}" class="btn-return"><p>Supprimer</p></a>
+            </div>
+            {% endif %}
+            <p>Notes : {{ element.rating }}/5</p>
+            <h3>{{ element.headline }}</h3>
+            <p>{{ element.body }}</p>
+            <div class="ticket">
+                <div class="user-date">
+                    {% if user == element.ticket.user %}
+                    <p class="user-publish">Vous avez demandé une critique</p>
+                    {% else %}
+                    <p class="user-publish">{{ element.ticket.user }} à demandé une critique</p>
+                    {% endif %} 
+                    <p class="date">{{ element.ticket.time_created }}</p>        
+                </div>
+                <h3>{{ element.ticket.title }}</h3>
+                <div class="element-ticket">
+                    <img src="{{ element.ticket.image.url }}" alt="">
+                    <div class="description">
+                        <p>Decription :</p>
+                        <p>{{ element.ticket.description }}</p>        
+                    </div>
+                </div>
+                <a href="{% url 'detail-ticket' element.ticket.id %}" class="btn detail-input"><p>Voir les critiques</p></a>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% else %}
+<p>Cette page est actuellement vide</p>
+{% endif %}
 
 {% endblock %}

@@ -148,7 +148,8 @@ h3 {
   justify-content: space-between;
   margin-bottom: 15px; }
   .element-ticket img {
-    max-width: 300px; }
+    max-width: 300px;
+    height: fit-content; }
   .element-ticket .description {
     box-sizing: border-box;
     padding: 15px; }
@@ -199,40 +200,23 @@ header {
   header .btn-return {
     margin: auto 0; }
 
-@media (max-width: 991.98px) {
-  .bloc {
-    width: 40%; }
-  img {
-    width: 20vw;
-    height: fit-content; } }
-
-@media (max-width: 575.98px) {
-  .jcont-center {
-    flex-wrap: wrap; }
-  .bloc {
-    width: 80%; }
-  .btn-list {
-    flex-wrap: wrap; }
-    .btn-list > .btn, .btn-list .btn-return {
-      margin: 10px auto; }
-  .description :nth-child(2) {
-    height: 200px;
-    overflow: hidden; }
+@media (max-width: 640px) {
   header {
+    height: min-content;
     flex-direction: column;
-    height: auto;
-    margin: 0; }
-    header img {
-      position: relative;
-      left: 50%;
+    margin: auto 15px; }
+    header > img {
+      margin-left: 50%;
       transform: translateX(-50%); }
-    header .menu {
-      margin: 5px 10px;
-      width: auto; }
-      header .menu nav {
-        display: flex;
-        flex-direction: column; }
-      header .menu a {
-        margin: 5px 0; } }
+    header div nav {
+      display: flex;
+      flex-direction: column;
+      margin-top: 8px; }
+      header div nav > a {
+        margin-bottom: 8px; }
+  .element-ticket {
+    flex-direction: column; }
+    .element-ticket img {
+      margin: auto; } }
 
 /*# sourceMappingURL=style.css.map */
